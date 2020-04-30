@@ -1,0 +1,12 @@
+- alias: "dracena no water"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.dracena_moister
+    below: 5
+    for:
+      hours: 1
+  action:
+    - service: tts.yandextts_say
+      entity_id: media_player.googlehomemini
+      data:
+        message: "Дорогой. полей цветочек, аaaaaaa, please"

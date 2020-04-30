@@ -1,0 +1,48 @@
+  - alias: 'tree_wled_toggle'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: lumi_sensor_switch_aq3_26
+        event: 1002
+    action:
+      - service: light.toggle
+        entity_id: light.wled
+
+  - alias: 'tree_wled_christmass'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: lumi_sensor_switch_aq3_26
+        event: 1007
+    action:
+      - service: light.turn_on
+        entity_id: light.wled
+        data_template:
+          effect: >
+            {% if state_attr('light.wled', 'effect') == "Rainbow" -%} 
+              Lightning
+            {%- elif state_attr('light.wled', 'effect') == "Lightning" -%}
+              Noise 1
+            {%- elif state_attr('light.wled', 'effect') == "Noise 1" -%}
+              Merry Christmas             
+            {%- else -%}
+              Rainbow
+            {%- endif %}
+  - alias: 'tree_wled_turn_off_all_lights'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: lumi_sensor_switch_aq3_26
+        event: 1001
+    action:
+      - service: light.turn_off
+        entity_id: group.all_lights
+      - service: switch.turn_off
+        entity_id: group.all_switches
+      - service: tts.yandextts_say
+        entity_id: media_player.googlehomemini
+        data:
+          message: "Приятных снов, мои дорогие."

@@ -1,0 +1,43 @@
+############## Ночник Таня димер минус (Традфри круглишок) #############
+  - alias: 'Decrease brightness of lamp from dimmer'
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: deconz_event
+        event_data:
+          id: tradfri_wireless_dimmer
+          event: 3002 # 4002
+      # - platform: event
+      #   event_type: deconz_event
+      #   event_data:
+      #     id: tradfri_wireless_dimmer
+      #     event: 4002 # 4002
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.light_7
+          brightness: >
+            {% set bri = state_attr('light.light_7', 'brightness') | int %}
+            {{ [bri-30, 0] | max }}
+
+############## Ночник таня плюс (Традфри круглишок) #############
+  - alias: 'Increase brightness of lamp from dimmer'
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: deconz_event
+        event_data:
+          id: tradfri_wireless_dimmer
+          event: 2002 # 1002
+      # - platform: event
+      #   event_type: deconz_event
+      #   event_data:
+      #     id: tradfri_wireless_dimmer
+      #     event: 1002 # 1002          
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.light_7
+          brightness: >
+            {% set bri = state_attr('light.light_7', 'brightness') | int %}
+            {{ [bri+30, 255] | min }}

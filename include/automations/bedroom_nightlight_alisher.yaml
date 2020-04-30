@@ -1,0 +1,41 @@
+############## Ночник для чтения. Алишер #############
+# Изменение яркости
+  - alias: 'alisher nightlight brightness up'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: temp_mi_magic_cube
+        # event: 2002
+    condition:
+      condition: template
+      value_template: >
+        {% set valid_events = [1002,1003,1004,1005,1006,2001,2003,2004,2005,2006,3001,3002,3004,3005,3006,4001,4002,4003,4005,4006,5001,5002,5003,5004,5006,6001,6002,6003,6004,6005,7007,1000,2000,3000,4000,5000,6000,1001,2002,3003,4004,5005,6006,7008] %}
+        {{ trigger.event.data.event not in valid_events }}
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: 
+            - light.light_6
+          brightness: >
+            {% if trigger.event.data.event | int > 0 -%}
+              {%- set bri = state_attr('light.light_6', 'brightness') | int -%}
+              {{ [bri+30, 255] | min }}
+            {%- elif trigger.event.data.event | int < 0 -%}
+              {%- set bri = state_attr('light.light_6', 'brightness') | int -%}
+              {{ [bri-30, 0] | max }}
+            {%- endif %}
+# Тогл светильника. потрясти
+  - alias: 'alisher nightlight toggle'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: temp_mi_magic_cube
+        event: 7007
+    action:
+      - service: light.toggle
+        entity_id: light.light_6
+

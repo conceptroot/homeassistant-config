@@ -1,0 +1,12 @@
+  # - platform: yr   # Weather prediction
+  #   name: Weather
+  #   monitored_conditions:
+  #     - temperature
+  - platform: systemmonitor # Системный монитор малины
+    resources:
+      - type: disk_free
+        arg: /
+      # - type: memory_free
+      # - type: processor_use
+      # - type: since_last_boot
+      - type: load_1m

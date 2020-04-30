@@ -1,0 +1,189 @@
+############## Датчик движения Включить #############
+  - alias: wcridor_turn_on_light_on_Max2_sensor
+    trigger:
+      platform: state
+      entity_id: binary_sensor.motion_sensor_aqara_2019_1
+      from: 'off'
+      to: 'on'
+    condition:
+      condition: state
+      entity_id: switch.sonoff_2018_1_relay
+      state: "off"
+    action:
+      - service: switch.turn_on
+        entity_id: switch.sonoff_2018_1_relay
+
+########### Датчик движения выключить #########################
+
+  - alias: wcridor_turn_off_light2_sensor
+    trigger:
+      platform: state
+      entity_id: binary_sensor.motion_sensor_aqara_2019_1
+      from: 'on'
+      to: 'off'
+    condition:
+      condition: state
+      entity_id: switch.sonoff_2018_1_relay
+      state: "on"
+    action:
+      - service: switch.turn_off
+        entity_id: switch.sonoff_2018_1_relay
+
+############ Автоматическое включение вытяжки, #################
+############ если влажность в ванной больше 65% ################
+  - alias: wc_auto_turn_on_fan
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.multi_sensor_aqara_2019_2
+      above: 65
+      for: 
+        seconds: 59
+    action:
+      - service: tts.yandextts_say
+        entity_id: media_player.googlehomemini
+        data:
+          message: "Очень влажно, включаю вытяжку в ванной"
+      - service: switch.turn_on
+        entity_id: switch.sonoff_mini_2019_3_relay_2
+
+############ Автоматическое выключение вытяжки, #################
+############ если влажность в ванной менее 65%  и вытяжка включена ################
+  - alias: wc_auto_turn_off_fan
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.multi_sensor_aqara_2019_2
+      below: 65
+      for: 
+        seconds: 59
+    condition:
+      - condition: state
+        entity_id: switch.sonoff_mini_2019_3_relay_2
+        state: "on"
+    action:
+      - service: tts.yandextts_say
+        entity_id: media_player.googlehomemini
+        data:
+          message: "Влажность ушла он май рист, выключаю вытяжку в ванной я юморист"
+      - service: switch.turn_off
+        entity_id: switch.sonoff_mini_2019_3_relay_2
+
+############ Включить вытяжку с круглой кнопки, если вытяжка выключена ################
+  - alias: wc_turn_on_fan_round_button
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: corridor_round_switch
+        event: 1002
+    condition:
+      - condition: state
+        entity_id: switch.sonoff_mini_2019_3_relay_2
+        state: "off"
+    action:
+      - service: switch.turn_on
+        entity_id: switch.sonoff_mini_2019_3_relay_2
+
+############ Автоматически Выключить вытяжку если включена 15 минут и влажность меньше 65% ################
+  - alias: 'wc_15mins_auto_off'
+    trigger:
+      platform: state
+      entity_id: switch.sonoff_mini_2019_3_relay_2
+      to: "on"
+      for: "00:15:00"
+    condition:
+      - condition: numeric_state
+        entity_id: sensor.multi_sensor_aqara_2019_2
+        below: 65
+    action:
+      - service: switch.turn_off
+        entity_id: switch.sonoff_mini_2019_3_relay_2
+
+############## Включить свет на минимум с круглой кнопки #############
+  - alias: wc_turn_on_light_on_Min_round_button
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: corridor_round_switch
+        event: 1004
+    condition:
+      condition: state
+      entity_id: light.wc1
+      state: "off"      
+    action:
+      - service: xiaomi_miio.light_set_scene
+        entity_id:
+          - light.wc1
+          - light.wc2
+          - light.wc3
+          - light.wc4
+          - light.wc5
+          - light.wc6
+        data:
+          scene: 4
+
+############## Выключить свет с круглой кнопки, если он включен #############
+  - alias: wc_turn_on_light_on_Min_round_button
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: corridor_round_switch
+        event: 1004
+    condition:
+      condition: state
+      entity_id: light.wc1
+      state: "on"      
+    action:
+      - service: light.turn_off
+        entity_id:
+          - light.wc1
+          - light.wc2
+          - light.wc3
+          - light.wc4
+          - light.wc5
+          - light.wc6
+
+############ Включить свет на максимум с настенного выключателя ######################
+  - alias: wc_turn_on_light_on_Maximum_wall_switch
+    trigger:
+      platform: state
+      entity_id: binary_sensor.sonsoff_mini_2019_3_wallswitch_2
+      from: 'off'
+      to: 'on'
+    condition:
+      condition: state
+      entity_id: light.wc1
+      state: "off"
+    action:
+      - service: xiaomi_miio.light_set_scene
+        entity_id: 
+          - light.wc1
+          - light.wc2
+          - light.wc3
+          - light.wc4
+          - light.wc5
+          - light.wc6
+        data:
+          scene: 1
+############ Выключить свет с настенного выключателя ######################
+  - alias: wc_turn_off_light_wall_switch
+    trigger:
+      platform: state
+      entity_id: binary_sensor.sonsoff_mini_2019_3_wallswitch_2
+      from: 'off'
+      to: 'on'
+    condition:
+      condition: state
+      entity_id: light.wc1
+      state: "on"
+    action:
+      - service: light.turn_off
+        entity_id: 
+          - light.wc1
+          - light.wc2
+          - light.wc3
+          - light.wc4
+          - light.wc5
+          - light.wc6
+      

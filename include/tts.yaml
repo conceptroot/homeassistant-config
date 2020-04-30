@@ -1,0 +1,6 @@
+  - platform: yandextts
+    api_key: yandextts_api_key
+    language: 'ru-RU'
+    codec: mp3
+    voice: zahar # <jane|oksana|alyss|omazh|zahar|ermil>
+    emotion: neutral

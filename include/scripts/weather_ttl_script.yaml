@@ -1,0 +1,38 @@
+  weather_ttl_script:
+    sequence:
+      - service: tts.yandextts_say
+        entity_id: media_player.googlehomemini
+        data_template: 
+          message: >
+            На улице сейчас
+            {% if states('weather.openweathermap') == 'cloudy' -%}
+              облачно 
+            {%- elif states('weather.openweathermap') == 'snowy' -%}
+              снег 
+            {%- elif states('weather.openweathermap') == 'partlycloudy' -%}
+              небольшая облачность 
+            {%- elif states('weather.openweathermap') == 'sunny' -%}
+              солнечно
+            {%- elif states('weather.openweathermap') == 'rainy' -%}
+              дождливо
+            {%- else -%}
+              нет такой кондиции, нужно доработать программу. Ошибка!
+            {%- endif %}.
+            Температура 
+            {{state_attr('weather.openweathermap', 'temperature')}} градуса.
+            Вечером будет
+            {% if state_attr('weather.openweathermap', 'forecast')[2]['condition'] == 'cloudy' -%}
+              облачно 
+            {%- elif state_attr('weather.openweathermap', 'forecast')[2]['condition'] == 'snowy' -%}
+              снег 
+            {%- elif state_attr('weather.openweathermap', 'forecast')[2]['condition'] == 'partlycloudy' -%}
+              небольшая облачность 
+            {%- elif state_attr('weather.openweathermap', 'forecast')[2]['condition'] == 'sunny' -%}
+              солнечно
+            {%- elif state_attr('weather.openweathermap', 'forecast')[2]['condition'] == 'rainy' -%}
+              дождливо
+            {%- else -%}
+              нет такой кондиции, нужно доработать программу. Ошибка!
+            {%- endif %}.
+            {{state_attr('weather.openweathermap', 'forecast')[2]['temperature']}}
+            градуса. 

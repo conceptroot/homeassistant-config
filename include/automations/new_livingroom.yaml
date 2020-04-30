@@ -1,0 +1,143 @@
+# id 2way_aqara_2019_1
+# 1 left 1002
+# 1 right 2002
+# 1 both 3002
+# id 2way_aqara_2019_2
+# 2 left 1002
+# 2 right 2002
+# 2 both 3002
+############# Коридор  ########################################
+############# Включение с первой левой кнопки волмаунт#########
+  - alias: 'wallmount_turn_corridor_on_max'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: 2way_aqara_2019_1
+        event: 1002
+    condition:
+      condition: state
+      entity_id: light.cor1
+      state: "off"
+    action:
+      - service: xiaomi_miio.light_set_scene
+        entity_id: 
+          - light.cor1
+          - light.cor2
+          - light.cor3
+          - light.cor4
+          - light.cor5
+          - light.cor6
+        data:
+          scene: 1
+################## Выключение с первой левой кнопки волмаунт#########
+  - alias: 'wallmount_turn_corridor_off'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: 2way_aqara_2019_1
+        event: 1002
+    condition:
+      condition: state
+      entity_id: light.cor1
+      state: "on"
+    action:
+      - service: light.turn_off
+        entity_id: light.corridor_lights
+
+
+############## Кухня ###########################################
+########### Включение с первой правой кнопки волмаунт ###########
+  - alias: 'kitchen_on_max'
+    initial_state: 'on'
+    condition:
+      condition: state
+      entity_id: light.kitchen1
+      state: "off"
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: 2way_aqara_2019_1
+        event: 2002
+    action:
+      - service: xiaomi_miio.light_set_scene
+        entity_id: 
+          - light.kitchen1
+          - light.kitchen2
+          - light.kitchen3
+          - light.kitchen4
+          - light.kitchen5
+          - light.kitchen6
+        data:
+          scene: 1
+########### Выключение с первой правой кнопки волмаунт ###########
+  - alias: 'kitchen_off'
+    initial_state: 'on'
+    condition:
+      condition: state
+      entity_id: light.kitchen1
+      state: "on"
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: 2way_aqara_2019_1
+        event: 2002
+    action:
+      - service: light.turn_off
+        entity_id: light.kitchen_spot_lights
+
+############################ Гостинная ############################
+############# Тогл со второй правой кнопки. Свет над барной стойкой #############################
+  - alias: 'livingroom_bar_toggle'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: 2way_aqara_2019_2
+        event: 1002
+    action:
+      - service: light.toggle
+        entity_id: light.kitchen_bar2
+#############  Тогл со второй левой кнопки. Люстра в гостинной переключение вкл/выкл###########
+  - alias: 'livingroom_ceiling_toggle'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: 2way_aqara_2019_2
+        event: 2002
+    action:
+      - service: light.toggle
+        entity_id: light.Livingroom_ceiling_light_philips
+
+##################### ДОПs СПАЛЬНЯ и ОКНА ######################################
+############# Тогл со второго обеих кнопок. Свет в спальне #####################
+  - alias: 'bedroom_ceiling_toggle'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: 2way_aqara_2019_2
+        event: 3002
+    action:
+      - service: light.toggle
+        entity_id: light.Bedroom_ceiling_light_philips
+############# Тогл с первого обеих кнопок. Свет в окне #####################
+  - alias: 'window_light_toggle'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: 2way_aqara_2019_1
+        event: 3002
+    action:
+      - service: switch.toggle
+        entity_id: switch.sonoff_2018_2_relay_2

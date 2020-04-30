@@ -1,0 +1,120 @@
+homeassistant:
+  name: Home
+  latitude: !secret my_latitude
+  longitude: !secret my_longitude
+  elevation: 100
+  unit_system: metric
+  time_zone: Europe/Moscow
+  customize: !include include/customize.yaml
+
+config:
+frontend:
+history:
+logbook:
+
+# mobile_app for mobile app work. New feature in dec 2019 
+mobile_app:
+
+# person: Новое в 0.88 появилось
+sun:
+# System Health integration data can be viewed in Developer Tools on the “Info” tab
+system_health:
+zeroconf:
+  
+# I use mariadb on host machine
+recorder:
+  db_url: !secret recorder_db_url
+
+http:
+  base_url: !secret my_base_url
+  ip_ban_enabled: true
+
+discovery:
+  ignore:
+    - yeelight
+
+################################################
+##         Includes                           ##
+################################################
+automation: !include_dir_merge_list include/automations/
+script: !include_dir_merge_named include/scripts/
+sensor: !include include/sensors.yaml
+group: !include include/groups.yaml
+yeelight: !include include/yeelight.yaml
+tts: !include include/tts.yaml
+timer: !include include/timers.yaml
+light: !include include/lights.yaml
+vacuum: !include include/vacuum.yaml
+
+google_assistant:
+  project_id: !secret google_assistant_id
+  service_account: !include secrets/google-assistant-creds.json
+  report_state: true
+  exposed_domains:
+    - light
+    - switch
+    - media_player
+
+cast:
+  media_player:
+    - host: !secret google_home_mini_ip
+
+weather:
+  - platform: openweathermap
+    api_key: !secret open_weather_api_key
+
+wake_on_lan:
+
+# telegram_bot:
+#   - platform: polling
+#     api_key: !secret telegram_bot_api_key
+#     proxy_url: !secret proxy_socks5_url
+#     proxy_params:
+#       username: !secret proxy_socks5_name
+#       password: !secret proxy_socks5_pass
+#     allowed_chat_ids:
+#       - !secret telegrma_bot_allowed_chat_id1
+#       - !secret telegrma_bot_allowed_chat_id2
+
+webostv:
+  host: !secret lg_ip
+  name: LG webOS Smart TV
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: !secret lg_mac
+    # standby_connection: true
+  # customize:
+  #   sources:
+  #     - livetv
+  #     - youtube
+  #     - makotv
+  #     - netflix
+
+media_player:
+notify:
+# notify:
+#   - name: telegram
+#     platform: telegram
+#     chat_id: !secret telegrma_bot_allowed_chat_id1
+
+binary_sensor:
+  - platform: ping
+    name: Server in France
+    host: !secret server_in_france_ip
+    count: 3
+    scan_interval: 900
+  - platform: ping
+    name: Core i5 server
+    host: !secret server_i5_ip
+    count: 3
+    scan_interval: 900
+
+influxdb:
+  host: !secret server_i5_ip
+  port: !secret influx_db_port
+  database: !secret influx_db_database
+  username: !secret influx_db_username
+  password: !secret influx_db_password
+  max_retries: 3
+  default_measurement: state

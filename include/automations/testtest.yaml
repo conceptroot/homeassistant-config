@@ -1,0 +1,29 @@
+  - alias: testtest
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: wc_round_switch
+        event: 1002
+    action:
+      - service: script.weather_ttl_script
+      - service: xiaomi_miio.light_set_scene
+        entity_id: light.kitchen1
+        data:
+          scene: 2
+
+  - alias: testtimer
+    trigger:
+      - platform: time
+        at: "20:00:00"
+    condition:
+      condition: numeric_state 
+      entity_id: sensor.dracena_moister
+      below: 5
+    action:
+      - service: tts.yandextts_say
+        entity_id: media_player.googlehomemini
+        data:
+          message: "Полей пожалуйста Драценочку, приятель."
+
+   

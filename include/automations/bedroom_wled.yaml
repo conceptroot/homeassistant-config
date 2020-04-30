@@ -1,0 +1,73 @@
+# Двойная кнопка акара. ВКЛ + КУБ
+  - alias: 'bedroom_wled_turn_on'
+    trigger:
+      - platform: event
+        event_type: deconz_event
+        event_data:
+          id: 2way_aqara_2019_4
+          event: 1002
+      - platform: event
+        event_type: deconz_event
+        event_data:
+          id: temp_mi_magic_cube
+          event: 4000
+    condition:
+      condition: state
+      entity_id: light.wled_2
+      state: "off"
+    action:
+      - service: light.turn_on
+        entity_id: light.wled_2
+        data:
+          brightness: 255
+          rgb_color: [255,159,0]
+          effect: Fire Flicker
+# Двойная кнопка акара. ВыКЛ + КУБ
+  - alias: 'bedroom_wled_turn_off'
+    trigger:
+      - platform: event
+        event_type: deconz_event
+        event_data:
+          id: 2way_aqara_2019_4
+          event: 1002
+      - platform: event
+        event_type: deconz_event
+        event_data:
+          id: temp_mi_magic_cube
+          event: 4000
+    condition:
+      condition: state
+      entity_id: light.wled_2
+      state: "on"
+    action:
+      - service: light.turn_off
+        entity_id: light.wled_2
+
+# Двойная кнопка акара. Поменять режим
+  - alias: 'bedroom_wled_christmass'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: 2way_aqara_2019_4
+        event: 2002
+    condition:
+      condition: state
+      entity_id: light.wled_2
+      state: "on"
+    action:
+      - service: light.turn_on
+        entity_id: light.wled_2
+        data_template:
+          effect: >
+            {% if state_attr('light.wled_2', 'effect') == "Palette" -%} 
+              Halloween
+            {%- elif state_attr('light.wled_2', 'effect') == "Halloween" -%}
+              Noise 2
+            {%- elif state_attr('light.wled_2', 'effect') == "Noise 2" -%}
+              Merry Christmas    
+            {%- elif state_attr('light.wled_2', 'effect') == "Merry Christmas" -%}
+              ICU            
+            {%- else -%}
+              Palette
+            {%- endif %}

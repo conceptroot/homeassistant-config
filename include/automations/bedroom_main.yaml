@@ -1,0 +1,55 @@
+# Выключатель центрального светильника
+  - alias: 'turn on ceiling light'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: 2way_aqara_2019_4
+        event: 3002
+    # condition:
+    #   condition: state
+    #   entity_id: light.cor1
+    #   state: "off"
+    action:
+      - service: light.toggle
+        entity_id: light.bedroom_ceiling_light_philips
+
+# Выключатель боковых спотов
+  - alias: 'turn on front light'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: 2way_aqara_2019_3
+        event: 2002
+    action:
+      - service: switch.toggle
+        entity_id: switch.sonoff_mini_2019_4_relay
+
+  - alias: 'turn on back light'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: 2way_aqara_2019_3
+        event: 1002
+    action:
+      - service: switch.toggle
+        entity_id: switch.sonoff_mini_2019_5_relay
+
+  - alias: 'toggle side lights'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: 2way_aqara_2019_3
+        event: 3002
+    action:
+      - service: switch.toggle
+        entity_id: 
+          - switch.sonoff_mini_2019_4_relay
+          - switch.sonoff_mini_2019_5_relay

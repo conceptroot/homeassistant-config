@@ -1,0 +1,50 @@
+############## Диван #############
+  - alias: 'coach toggle'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: temp_2way_switch
+        event: 3002
+    action:
+      - service: light.toggle
+        entity_id: 
+          - light.light_3
+          - light.light_4
+
+  - alias: 'coach brightness up'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: temp_2way_switch
+        event: 2002
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: 
+            - light.light_3
+            - light.light_4
+          brightness: >
+            {% set bri = state_attr('light.light_3', 'brightness') | int %}
+            {{ [bri+30, 249] | min }}
+
+  - alias: 'coach brightness down'
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: deconz_event
+      event_data:
+        id: temp_2way_switch
+        event: 1002
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: 
+            - light.light_3
+            - light.light_4
+          brightness: >
+            {% set bri = state_attr('light.light_3', 'brightness') | int %}
+            {{ [bri-30, 0] | max }}

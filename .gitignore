@@ -1,0 +1,13 @@
+secrets
+secrets.yaml
+webostv.conf
+home-assistant.log
+.cloud
+.storage
+.vscode
+esphome
+deps
+tts
+include/lights.yaml
+include/vacuum.yaml
+include/automations-temp
