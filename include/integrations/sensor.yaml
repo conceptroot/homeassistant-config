@@ -9,3 +9,14 @@ sensor:
       - type: load_1m
       - type: load_15m
       - type: last_boot
+  - platform: qnap
+    host: !secret qnap_ip
+    port: !secret qnap_port
+    username: !secret qnap_user
+    password: !secret qnap_password
+    monitored_conditions:
+      - status
+      - cpu_usage
+      - memory_percent_used
+      - network_tx
+      - volume_percentage_used
