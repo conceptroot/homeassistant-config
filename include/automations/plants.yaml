@@ -1,12 +1,13 @@
-- alias: "dracena no water"
+- alias: "Dracena - time to water"
   trigger:
-    platform: numeric_state
+    - platform: time
+      at: "20:00:00"
+  condition:
+    condition: numeric_state 
     entity_id: sensor.dracena_moister
     below: 5
-    for:
-      hours: 1
   action:
     - service: tts.yandextts_say
       entity_id: media_player.googlehomemini
       data:
-        message: "Дорогой. полей цветочек, аaaaaaa, please"
+        message: "Полей пожалуйста Драценочку, приятель."
