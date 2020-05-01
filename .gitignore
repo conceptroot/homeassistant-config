@@ -9,5 +9,6 @@ esphome
 deps
 tts
 include/lights.yaml
+include/integrations/light.yaml
 include/vacuum.yaml
 include/automations-temp

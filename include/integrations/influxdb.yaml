@@ -1,0 +1,8 @@
+influxdb:
+  host: !secret server_i5_ip
+  port: !secret influx_db_port
+  database: !secret influx_db_database
+  username: !secret influx_db_username
+  password: !secret influx_db_password
+  max_retries: 3
+  default_measurement: state

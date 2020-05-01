@@ -6,3 +6,4 @@ TODO:
   4. Put all integrations in apropriate folder
   5. Make scenes
   6. Make zones
+  7. Add telegram integration

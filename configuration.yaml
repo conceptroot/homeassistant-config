@@ -6,6 +6,7 @@ homeassistant:
   unit_system: metric
   time_zone: Europe/Moscow
   customize: !include include/customize.yaml
+  packages: !include_dir_named ./include/integrations/
 
 config:
 frontend:
@@ -38,12 +39,10 @@ discovery:
 ################################################
 automation: !include_dir_merge_list include/automations/
 script: !include_dir_merge_named include/scripts/
-sensor: !include include/sensors.yaml
 group: !include include/groups.yaml
 yeelight: !include include/yeelight.yaml
 tts: !include include/tts.yaml
 timer: !include include/timers.yaml
-light: !include include/lights.yaml
 vacuum: !include include/vacuum.yaml
 
 google_assistant:
@@ -58,10 +57,6 @@ google_assistant:
 cast:
   media_player:
     - host: !secret google_home_mini_ip
-
-weather:
-  - platform: openweathermap
-    api_key: !secret open_weather_api_key
 
 wake_on_lan:
 
@@ -92,29 +87,9 @@ webostv:
   #     - netflix
 
 media_player:
-notify:
+# notify:
 # notify:
 #   - name: telegram
 #     platform: telegram
 #     chat_id: !secret telegrma_bot_allowed_chat_id1
 
-binary_sensor:
-  - platform: ping
-    name: Server in France
-    host: !secret server_in_france_ip
-    count: 3
-    scan_interval: 900
-  - platform: ping
-    name: Core i5 server
-    host: !secret server_i5_ip
-    count: 3
-    scan_interval: 900
-
-influxdb:
-  host: !secret server_i5_ip
-  port: !secret influx_db_port
-  database: !secret influx_db_database
-  username: !secret influx_db_username
-  password: !secret influx_db_password
-  max_retries: 3
-  default_measurement: state

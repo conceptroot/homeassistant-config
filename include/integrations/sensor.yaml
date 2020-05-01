@@ -1,0 +1,11 @@
+sensor:
+  - platform: systemmonitor # Системный монитор малины
+    resources:
+      - type: disk_free
+        arg: /
+      - type: memory_free
+      - type: memory_use
+      - type: processor_use
+      - type: load_1m
+      - type: load_15m
+      - type: last_boot

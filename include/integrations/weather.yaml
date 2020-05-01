@@ -1,0 +1,4 @@
+weather:
+  - platform: openweathermap
+    api_key: !secret open_weather_api_key
+

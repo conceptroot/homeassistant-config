@@ -1,0 +1,12 @@
+binary_sensor:
+  - platform: ping
+    name: Server in France
+    host: !secret server_in_france_ip
+    count: 3
+    scan_interval: 900
+  - platform: ping
+    name: Core i5 server
+    host: !secret server_i5_ip
+    count: 3
+    scan_interval: 900
+
