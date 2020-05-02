@@ -1,0 +1,24 @@
+- name: Romantic
+  entities: 
+    light.livingroom_computer_light_philips:
+      state: on
+      xy_color: [0.547, 0.237]
+      brightness: 55
+    light.wled:
+      state: on
+      xy_color: [0.545, 0.228]
+      brightness: 100
+      speed: 128
+      intensity: 128
+      effect: Fire Flicker
+    light.wled3:
+      state: on
+      xy_color: [0.545, 0.228]
+      brightness: 100
+      speed: 128
+      intensity: 128
+      effect: Fire Flicker
+    light.kitchen_bar2:
+      state: on
+      xy_color: [0.547, 0.237]
+      brightness: 55

@@ -1,5 +1,5 @@
 ############## Выключить весь свет в квартире #############
-  - alias: 'сorridor_2way_switch_WHOLE_APPARTMENT_lights_off'
+  - alias: 'сorridor 2way switch WHOLE APPARTMENT lights off'
     initial_state: 'on'
     trigger:
       platform: event
@@ -9,10 +9,8 @@
         event: 3002
     action:
       - service: script.weather_ttl_script
-      - service: light.turn_off
-        entity_id: group.all_lights
-      - service: switch.turn_off
-        entity_id: group.all_switches
+      # - service: light.turn_off
+      #   entity_id: all
 
 ############## Включить свет на максимум теплый (2х клавишник)#############
   - alias: 'Corridor 2way switch lights on'
@@ -28,16 +26,8 @@
       entity_id: light.cor1
       state: "off"
     action:
-      - service: xiaomi_miio.light_set_scene
-        entity_id: 
-          - light.cor1
-          - light.cor2
-          - light.cor3
-          - light.cor4
-          - light.cor5
-          - light.cor6
-        data:
-          scene: 2
+      - service: script.turn_on
+        entity_id: script.corridor_light_warm_high
 
 ############## Выключить свет с выключателя (2х клавишник)#############
   - alias: 'corridor_2way_switch_turnoff_light'
@@ -52,14 +42,8 @@
       entity_id: light.cor1
       state: "on"
     action:
-      - service: light.turn_off
-        entity_id: 
-          - light.cor1
-          - light.cor2
-          - light.cor3
-          - light.cor4
-          - light.cor5
-          - light.cor6
+      - service: script.turn_on
+        entity_id: script.corridor_light_off
 
 ############## Выключить свет автоматически (Детектор движения)#############
   - alias: 'corridor_motion_sensor_turnoff_light'
@@ -73,14 +57,8 @@
       entity_id: light.cor1
       state: "on"
     action:
-      - service: light.turn_off
-        entity_id: 
-          - light.cor1
-          - light.cor2
-          - light.cor3
-          - light.cor4
-          - light.cor5
-          - light.cor6
+      - service: script.turn_on
+        entity_id: script.corridor_light_off
 
 ############## Включить свет на максимум теплый (Детектор движения)#############
   - alias: 'Corridor_motion_sensor_lights_on'
@@ -95,17 +73,8 @@
       entity_id: light.cor1
       state: "off"
     action:
-      - service: xiaomi_miio.light_set_scene
-        entity_id: 
-          - light.cor1
-          - light.cor2
-          - light.cor3
-          - light.cor4
-          - light.cor5
-          - light.cor6
-        data:
-          scene: 2
-
+      - service: script.turn_on
+        entity_id: script.corridor_light_warm_high 
 
 ############## Автоматически выключить утюг, если включен более 30 минут #############
   # - alias: 'corridor_iron_auto_off'

@@ -1,0 +1,60 @@
+corridor_light_cold_high:
+  sequence:
+    - service: xiaomi_miio.light_set_scene  
+      entity_id:
+        - light.cor1
+        - light.cor2
+        - light.cor3
+        - light.cor4
+        - light.cor5
+        - light.cor6
+      data:
+        scene: 1
+
+corridor_light_warm_high:
+  sequence:
+    - service: xiaomi_miio.light_set_scene  
+      entity_id:
+        - light.cor1
+        - light.cor2
+        - light.cor3
+        - light.cor4
+        - light.cor5
+        - light.cor6
+      data:
+        scene: 2
+
+corridor_light_warm_middle:
+  sequence:
+    - service: xiaomi_miio.light_set_scene  
+      entity_id:
+        - light.cor1
+        - light.cor2
+        - light.cor3
+        - light.cor4
+        - light.cor5
+        - light.cor6
+      data:
+        scene: 3
+
+corridor_light_warm_low:
+  sequence:
+    - service: xiaomi_miio.light_set_scene  
+      entity_id:
+        - light.cor1
+        - light.cor2
+        - light.cor3
+        - light.cor4
+        - light.cor5
+        - light.cor6
+      data:
+        scene: 4
+
+corridor_light_off:
+  sequence:
+    - service: light.turn_off
+      entity_id:
+        - light.corridor_lights
+
+
+
