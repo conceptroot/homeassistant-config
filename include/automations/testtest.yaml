@@ -11,3 +11,12 @@
         entity_id: light.kitchen1
         data:
           scene: 2
+  - alias: testOpener
+    trigger:
+      platform: event
+      event_type: state_changed
+      event_data:
+        entity_id: binary_sensor.temp_door_sensor_aqara
+    action:
+      - service: script.turn_on
+        entity_id: script.tts_hello_world_script
