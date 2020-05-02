@@ -1,0 +1,9 @@
+google_assistant:
+  project_id: !secret google_assistant_id
+  service_account: !include ../../secrets/google-assistant-creds.json
+  report_state: true
+  exposed_domains:
+    - light
+    - switch
+    - media_player
+

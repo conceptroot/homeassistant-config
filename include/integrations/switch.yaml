@@ -1,0 +1,7 @@
+switch:
+  - platform: wake_on_lan
+    name: "Ryzen 7 desktop"
+    host: !secret ryzen7_ip_eth
+    mac: !secret ryzen7_mac_eth
+    turn_off:
+      # service: script.pc_of

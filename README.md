@@ -7,3 +7,4 @@ TODO:
   5. Make scenes
   6. Make zones
   7. Add telegram integration
+  8. WOL proxy, to wake up different subnet

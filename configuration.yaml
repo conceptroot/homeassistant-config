@@ -45,20 +45,10 @@ tts: !include include/tts.yaml
 timer: !include include/timers.yaml
 vacuum: !include include/vacuum.yaml
 
-google_assistant:
-  project_id: !secret google_assistant_id
-  service_account: !include secrets/google-assistant-creds.json
-  report_state: true
-  exposed_domains:
-    - light
-    - switch
-    - media_player
-
 cast:
   media_player:
     - host: !secret google_home_mini_ip
 
-wake_on_lan:
 
 # telegram_bot:
 #   - platform: polling
@@ -71,13 +61,6 @@ wake_on_lan:
 #       - !secret telegrma_bot_allowed_chat_id1
 #       - !secret telegrma_bot_allowed_chat_id2
 
-webostv:
-  host: !secret lg_ip
-  name: LG webOS Smart TV
-  turn_on_action:
-    service: wake_on_lan.send_magic_packet
-    data:
-      mac: !secret lg_mac
     # standby_connection: true
   # customize:
   #   sources:

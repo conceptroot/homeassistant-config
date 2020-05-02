@@ -1,0 +1,11 @@
+# weather_ttl_script:
+#   sequence:
+#     - service: wake_on_lan.send_magic_packet
+#       entity_id: media_player.googlehomemini
+tts_hello_world_script:
+  sequence:
+    - service: tts.yandextts_say
+      entity_id: media_player.googlehomemini
+      data:
+        message: "Hello world. Just testing."
+ 
