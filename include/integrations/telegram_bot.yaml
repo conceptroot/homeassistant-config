@@ -1,0 +1,9 @@
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_bot_api_key
+    proxy_url: !secret proxy_socks5_url
+    proxy_params:
+      username: !secret proxy_socks5_login
+      password: !secret proxy_socks5_pass
+    allowed_chat_ids:
+      - !secret telegram_bot_allowed_chat_id1
