@@ -1,0 +1,5 @@
+vacuum:
+  - platform: xiaomi_miio
+    host: !secret dusty_ip
+    token: !secret dusty_token
+    name: dusty_vacuum

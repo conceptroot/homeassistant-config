@@ -44,7 +44,6 @@ group: !include include/groups.yaml
 yeelight: !include include/yeelight.yaml
 tts: !include include/tts.yaml
 timer: !include include/timers.yaml
-vacuum: !include include/vacuum.yaml
 
 cast:
   media_player:
