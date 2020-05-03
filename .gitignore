@@ -5,6 +5,8 @@ home-assistant.log
 .cloud
 .storage
 .vscode
+*.db
+home-assistant_v2.*
 esphome
 deps
 tts

@@ -1,5 +1,5 @@
 webostv:
-  host: !secret lg_ip_eth
+  host: !secret lg_ip_wifi
   name: LG webOS Smart TV
   turn_on_action:
     service: wake_on_lan.send_magic_packet

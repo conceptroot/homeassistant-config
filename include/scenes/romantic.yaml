@@ -1,0 +1,58 @@
+name: Romantic
+entities: 
+  light.livingroom_computer_light_philips:
+    state: on
+    xy_color: [0.547, 0.237]
+    brightness: 55
+  light.wled:
+    state: on
+    xy_color: [0.545, 0.228]
+    brightness: 100
+    speed: 128
+    intensity: 128
+    effect: Fire Flicker
+  light.wled_3:
+    state: on
+    xy_color: [0.545, 0.228]
+    brightness: 100
+    speed: 128
+    intensity: 128
+    effect: Fire Flicker
+  light.kitchen_bar2:
+    state: on
+    xy_color: [0.547, 0.237]
+    brightness: 55
+  light.kitchen_spot_lights:
+    state: off
+  light.livingroom_ceiling_light_philips:
+    state: off
+  light.light_3:
+    state: off
+  light.light_4:
+    state: off
+  switch.sonoff_mini_2019_1_relay:
+    state: off
+  switch.sonoff_mini_2019_2_relay:
+    state: off
+  switch.sonoff_2018_2_relay_2:
+    state: off
+# not livingroom
+  light.wled_2:
+    state: on
+    xy_color: [0.545, 0.228]
+    brightness: 100
+    speed: 128
+    intensity: 128
+    effect: Fire Flicker
+  light.corridor_lights:
+    state: off
+  switch.sonoff_mini_2019_4_relay:
+    state: off
+  switch.sonoff_mini_2019_5_relay:
+    state: off
+  light.light_7:
+    state: off
+  light.light_6:
+    state: off
+  light.bedroom_ceiling_light_philips:
+    state: off

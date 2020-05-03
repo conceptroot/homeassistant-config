@@ -1,9 +1,9 @@
 ############## гостинная #######################################
 # Lights
-light.Livingroom_ceiling_light_philips:
+light.livingroom_ceiling_light_philips:
   friendly_name: Люстра в гостинной
   icon: mdi:globe-light
-light.Livingroom_Computer_light_philips:
+light.livingroom_computer_light_philips:
   friendly_name: Светильник у компьютера
   icon: mdi:lava-lamp
 
@@ -36,7 +36,7 @@ sensor.multi_sensor_aqara_2017:
 
 #################  спальня ######################################
 # lights
-light.Bedroom_ceiling_light_philips:
+light.bedroom_ceiling_light_philips:
   friendly_name: Люстра в спальне
   icon: mdi:globe-light
 light.light_7:

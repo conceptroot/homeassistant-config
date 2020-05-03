@@ -39,7 +39,7 @@ discovery:
 ################################################
 automation: !include_dir_merge_list include/automations/
 script: !include_dir_merge_named include/scripts/
-scene: !include_dir_merge_list include/scenes/
+scene: !include_dir_list include/scenes/
 group: !include include/groups.yaml
 yeelight: !include include/yeelight.yaml
 tts: !include include/tts.yaml
