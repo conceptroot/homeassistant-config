@@ -1,0 +1,11 @@
+- alias: automation alias (name)
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.fridge_late_night_binge_eating
+      from: "off" 
+      to: "on" 
+  action:
+    - service: tts.yandextts_say
+      entity_id: media_player.googlehomemini
+      data:
+        message: "После восьми не кушать. Это вредно"
