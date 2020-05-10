@@ -8,7 +8,9 @@
   action:
     - service: switch.turn_on
       entity_id: switch.xiaomi_switch_1
-
+    - service: notify.telegram_notifier
+      data:
+        message: "В доме включили электричество. Включаю резервную линию к основному электропитанию"
 - alias: "No power in house"
   trigger:
     platform: state

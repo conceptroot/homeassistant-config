@@ -1,4 +1,4 @@
 notify:
   - name: telegram_notifier 
     platform: telegram
-    chat_id: !secret telegram_bot_allowed_chat_id1
+    chat_id: !secret telegram_bot_allowed_chat_home_id2

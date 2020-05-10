@@ -7,3 +7,4 @@ telegram_bot:
       password: !secret proxy_socks5_pass
     allowed_chat_ids:
       - !secret telegram_bot_allowed_chat_id1
+      - !secret telegram_bot_allowed_chat_home_id2
