@@ -6,3 +6,4 @@ TODO:
   6. Make zones
   7. Add telegram integration
   8. WOL proxy, to wake up different subnet
+  9. Add auto-on config for Main Server plug

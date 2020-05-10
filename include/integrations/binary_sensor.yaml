@@ -9,6 +9,11 @@ binary_sensor:
     host: !secret server_i5_ip
     count: 3
     scan_interval: 900
+  - platform: ping
+    name: google_home_mini_ping 
+    host: !secret google_home_mini_ip
+    count: 3
+    scan_interval: 60
   - platform: tod
     name: night_time
     after: '20:00'
