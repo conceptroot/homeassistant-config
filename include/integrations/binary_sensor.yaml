@@ -16,7 +16,7 @@ binary_sensor:
     scan_interval: 60
   - platform: tod
     name: night_time
-    after: '20:00'
+    after: '22:00'
     before: '06:00'
   - platform: template
     sensors:
