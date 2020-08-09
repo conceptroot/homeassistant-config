@@ -14,9 +14,10 @@
 - alias: "No power in house"
   trigger:
     platform: state
-    entity_id: binary_sensor.google_home_mini_ping
+    entity_id: binary_sensor.x2pro_tv_ping
     from: 'on'
     to: 'off'
+    for: "00:02:00"
   action:
     - service: notify.telegram_notifier
       data:

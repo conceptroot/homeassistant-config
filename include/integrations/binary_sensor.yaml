@@ -14,6 +14,11 @@ binary_sensor:
     host: !secret google_home_mini_ip
     count: 3
     scan_interval: 60
+  - platform: ping
+    name: x2pro_tv_ping
+    host: !secret x2pro_tv_ip_eth
+    count: 3
+    scan_interval: 60
   - platform: tod
     name: night_time
     after: '22:00'
